@@ -1,17 +1,19 @@
 
 import { useRouter } from 'next/router';
-
+import Navbar from '../../components/Navbar'
 import styles from '../../styles/Feed.module.css';
 export const Feed = ({ articles, pageNumber }) => {
   const router = useRouter();
-  return  (
+  return  articles.length? (
     <>
-    <div className={styles.main}>
+      <div className='bg-slate-100 page-container'>
+        <Navbar/>
+    <div className=" flex mt-24 items-center flex-col justify-center">
     {articles.map((article, index) => (
-      <div key={index} className={styles.post}>
-        <h1 onClick={() => (window.location.href = article.url)}>{article.title}</h1>
-        <p>{article.description}</p>
-        {!!article.urlToImage && <img src={article.urlToImage} />}
+      <div key={index} className="w-96 mb-10 pb-10 rounded-r-lg">
+        <h1 className='font-bold text-xl cursor-pointer text-center mb-2 pb-2' onClick={() => (window.location.href = article.url)}>{article.title}</h1>
+        <p className='text-center mb-2 pb-2'>{article.description}</p>
+        {!!article.urlToImage && <img className='w-full' src={article.urlToImage} />}
       </div>
     ))}
   </div>
@@ -35,9 +37,9 @@ export const Feed = ({ articles, pageNumber }) => {
      <div>#{pageNumber}</div>
 
      <div
-       className={pageNumber === 5 ? styles.disabled : styles.active}
+       className={pageNumber === 10 ? styles.disabled : styles.active}
        onClick={() => {
-         if (pageNumber < 5) {
+         if (pageNumber < 10) {
            // As of the current version of Next.js the default behavior for router.push
            // will leave the scroll where it is, so we have to manually call scrollTo.
            // This however is being worked on and is fixed in canary.
@@ -50,15 +52,22 @@ export const Feed = ({ articles, pageNumber }) => {
        Next Page
      </div>
    </div>
-   
+   </div>
    </>
-  );
+  ): (<>
+  <div className="bg-slate-100 page-container">
+      <Navbar />
+      <div className=" flex mt-24 items-center flex-col justify-center">
+        <h1 className='font-bold text-xl'>Oops! No articles for this page</h1>
+      </div>
+    </div>
+    </>);
 };
 
 export const getServerSideProps = async pageContext => {
   const pageNumber = pageContext.query.pno;
 
-  if (!pageNumber || pageNumber < 1 || pageNumber > 10) {
+  if (!pageNumber || pageNumber < 1 || pageNumber > 5) {
     return {
       props: {
         articles: [],

@@ -3,10 +3,12 @@
     height: 50px;
     display: flex;
     justify-content: center;
+    font-size: xx-large;
   }
   .main div {
     margin: 25px;
     cursor: pointer;
+    color: rgb(27, 24, 24);
   }
   .main div:hover {
     color: rgb(168, 168, 168);

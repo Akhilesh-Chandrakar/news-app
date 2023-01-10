@@ -1,18 +1,18 @@
 
-import { Inter } from '@next/font/google'
-import Navbar from '../components/Navbar'
-import styles from '../styles/Home.module.css'
 
-const inter = Inter({ subsets: ['latin'] })
+import Navbar from '../components/Navbar'
+
+
+
 
 export default function Home() {
   return (
     <>
-      <div className='page-container'>
+      <div className=' bg-sky-800 page-container'>
         <Navbar/>
-        <div className={styles.main}>
-        <h1> Hello, Welcome to Next.org News</h1>
-        <h2>Go to feed for Scrolling news </h2>
+        <div className=" mt-32  flex-1 flex items-center flex-col justify-center">
+        <h1 className='font-bold text-4xl mb-20 cursor-pointer text-center' > Hello, Welcome to Next.org News</h1>
+        <h2 className='font-bold text-3xl mb-20 cursor-pointer text-center'>Go to Feed Section for Scrolling news </h2>
       </div>
       </div>
     </>
